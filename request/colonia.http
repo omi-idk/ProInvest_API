@@ -1,0 +1,36 @@
+@api = http://localhost:3000/colonia
+###
+GET {{api}}
+
+###
+POST http://localhost:3000/colonia
+Content-Type: application/json
+
+{
+    "Nombre_Colonia": "Pedro Xalapeño"
+    
+}
+
+###
+PUT http://localhost:3000/colonia/5
+Content-Type: application/json
+
+{
+    "Nombre_Colonia": "Nuevos Berros"
+}
+
+
+###
+DELETE http://localhost:3000/colonia/4
+
+
+//Colonia con un Id_Municipio
+###
+POST http://localhost:3000/colonia
+Content-Type: application/json
+
+{
+    "Nombre_Colonia": "Pedro Xalapeño c idmuni",
+    "Municipio_Id" : "5"
+    
+}

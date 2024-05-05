@@ -1,0 +1,36 @@
+@api = http://localhost:3000/codigoPostal
+###
+GET {{api}}
+
+###
+POST http://localhost:3000/codigoPostal
+Content-Type: application/json
+
+{
+    "Codigo_Postal": "91042"
+    
+}
+
+###
+PUT http://localhost:3000/codigoPostal/2
+Content-Type: application/json
+
+{
+    "Codigo_Postal": "91777"
+}
+
+
+###
+DELETE http://localhost:3000/codigoPostal/2
+
+
+//Municipio con un Id_Estado
+###
+POST http://localhost:3000/codigoPostal
+Content-Type: application/json
+
+{
+    "Codigo_Postal": "99999",
+    "Colonia_Id" : "3"
+    
+}

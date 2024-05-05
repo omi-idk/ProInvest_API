@@ -1,0 +1,24 @@
+@api = http://localhost:3000/estado
+###
+GET {{api}}
+
+###
+POST http://localhost:3000/estado
+Content-Type: application/json
+
+{
+    "Nombre_Estado": "Pedro Xalapeño"
+}
+
+
+
+###
+PUT http://localhost:3000/estado/5
+Content-Type: application/json
+
+{
+    "Nombre_Estado": "CD Xalapa"
+}
+
+###
+DELETE http://localhost:3000/estado/3
