@@ -1,0 +1,48 @@
+@api = http://localhost:3000/cliente
+###
+GET {{api}}
+
+###
+POST http://localhost:3000/cliente
+Content-Type: application/json
+
+{
+    "Nombres": "Jaime",
+    "Apellido_Paterno": "Gomez",
+    "Apellido_Materno": "Perez",
+    "Correo": "jaime.gomez@example.com",
+    "Telefono": "555-1234",
+    "Rfc": "GOMJ910101XXX",
+    "Fecha_Nacimiento": "1991-01-01",
+    "Grado_Academico": "Licenciatura",
+    "Profesion": "Ingeniero",
+    "Contraseña": "micontra",
+    "Empresa_Trabajo_Id": "",
+    "Codigo_Postal_Id": "",
+    "Informacion_Financiera_Id": ""
+}
+
+###
+PUT http://localhost:3000/cliente/5
+Content-Type: application/json
+
+{
+    "Nombres": "Nuevo nombre",
+    "Apellido_Paterno": "Nuevo apellido paterno",
+    "Apellido_Materno": "Nuevo apellido materno",
+    "Correo": "nuevo.correo@example.com",
+    "Telefono": "555-5678",
+    "Rfc": "NUEN910101XXX",
+    "Fecha_Nacimiento": "1990-01-01",
+    "Grado_Academico": "Maestría",
+    "Profesion": "Arquitecto",
+    "Contraseña": "nuevac",
+    "Empresa_Trabajo_Id": "",
+    "Codigo_Postal_Id": "",
+    "Informacion_Financiera_Id": ""
+}
+
+
+###
+DELETE http://localhost:3000/cliente/1
+
