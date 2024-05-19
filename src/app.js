@@ -5,6 +5,7 @@ import estadoRoutes from './routes/estado.routes'
 import municipiosRouters from './routes/municipio.routes'
 import coloniaRouters from './routes/colonia.routes'
 import codigoPostalRouters from './routes/codigoPostal.routes'
+import empresTrabajoRouters from './routes/empresaTrabajo.routes'
 
 
 const app = express()
@@ -22,6 +23,7 @@ app.use(estadoRoutes)
 app.use(municipiosRouters)
 app.use(coloniaRouters)
 app.use(codigoPostalRouters)
+app.use(empresTrabajoRouters)
 
 
 

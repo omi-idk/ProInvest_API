@@ -1,0 +1,28 @@
+@api = http://localhost:3000/empresaTrabajo
+
+###
+GET http://localhost:3000/empresaTrabajo
+
+###
+POST http://localhost:3000/empresaTrabajo
+Content-Type: application/json
+
+{
+    "Nombre_Empresa": "Soriana",
+    "Correo_Electrónico": "Soriana@empresa.com",
+    "Telefono": "1234567890"
+}
+
+###
+PUT http://localhost:3000/empresaTrabajo/2
+Content-Type: application/json
+
+{
+    "Nombre_Empresa": "Chedraui",
+    "Correo_Electrónico": "nuevo_correo@empresa.com",
+    "Telefono": "9876543210"
+}
+
+
+###
+DELETE http://localhost:3000/empresaTrabajo/2
