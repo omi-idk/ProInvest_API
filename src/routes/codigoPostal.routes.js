@@ -4,7 +4,7 @@ import { createNewCodigoPostal, deleteCodigoPostal, getCodigoPostal, updateCodig
 const router = Router();
 
 router.get('/codigoPostal', getCodigoPostal);
-router.post('/codigoPostal', createNewCodigoPostal); // Corrección: Cambiado de '/codigoPosta' a '/codigoPostal'
+router.post('/codigoPostal', createNewCodigoPostal);
 router.put('/codigoPostal/:id', updateCodigoPostal);
 router.delete('/codigoPostal/:id', deleteCodigoPostal);
 

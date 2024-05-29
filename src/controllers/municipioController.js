@@ -1,12 +1,13 @@
-import { getConnection, sql } from '../dbConfig/connection'
+import { getConnection, sql } from '../dbConfig/connection';
 
-
+// Obtener todos los municipios
 export const getMunicipios = async (req, res) => {
     const pool = await getConnection();
-    const result =  await pool.request().query("SELECT * FROM Municipio")
-   res.json(result.recordset)
+    const result = await pool.request().query("SELECT * FROM Municipio");
+    res.json(result.recordset);
 };
 
+// Crear un nuevo municipio
 export const createNewMunicipio = async (req, res) => {
     let { Nombre_Municipio, Estado_Id } = req.body;
 
@@ -29,7 +30,7 @@ export const createNewMunicipio = async (req, res) => {
     }
 };
 
-
+// Actualizar un municipio existente
 export const updateMunicipio = async (req, res) => {
     const { id } = req.params;
     const { Nombre_Municipio, Estado_Id } = req.body;
@@ -54,18 +55,17 @@ export const updateMunicipio = async (req, res) => {
     }
 };
 
+// Eliminar un municipio
 export const deleteMunicipio = async (req, res) => {
-    const { id } = req.params; // Obtener el ID del municipio de los parámetros de la solicitud
+    const { id } = req.params;
 
-    // Verificar que el ID esté presente
     if (!id) {
         return res.status(400).json({ msg: 'ID del municipio no proporcionado' });
     }
 
-    const pool = await getConnection(); // Obtener la conexión a la base de datos
+    const pool = await getConnection();
 
     try {
-        // Crear la consulta SQL para eliminar el municipio por su ID
         const result = await pool.request()
             .input('idMunicipio', sql.Int, id)
             .query('DELETE FROM Municipio WHERE Id_Municipio = @idMunicipio');
@@ -80,5 +80,3 @@ export const deleteMunicipio = async (req, res) => {
         res.status(500).json({ msg: 'Error interno del servidor al eliminar municipio' });
     }
 };
-
-

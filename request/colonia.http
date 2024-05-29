@@ -21,7 +21,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/colonia/4
+DELETE http://localhost:3000/colonia/1
 
 
 //Colonia con un Id_Municipio

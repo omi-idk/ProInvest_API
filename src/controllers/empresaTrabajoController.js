@@ -1,11 +1,13 @@
-import { getConnection, sql } from '../dbConfig/connection'
+import { getConnection, sql } from '../dbConfig/connection';
 
+// Obtener todas las empresas de trabajo
 export const getEmpresaTrabajo = async (req, res) => {
     const pool = await getConnection();
-    const result =  await pool.request().query("SELECT * FROM Empresa_Trabajo")
-   res.json(result.recordset)
+    const result = await pool.request().query("SELECT * FROM Empresa_Trabajo");
+    res.json(result.recordset);
 };
 
+// Crear una nueva empresa de trabajo
 export const createNewEmpresaTrabajo = async (req, res) => {
     const { Nombre_Empresa, Correo_Electrónico, Telefono } = req.body;
 
@@ -22,7 +24,7 @@ export const createNewEmpresaTrabajo = async (req, res) => {
             .input("telefono", sql.VarChar, Telefono)
             .query('INSERT INTO Empresa_Trabajo (Nombre_Empresa, Correo_Electrónico, Telefono) VALUES (@nombreEmpresa, @correoElectronico, @telefono)');
 
-        res.status(200).json({ msg: 'Empresa de trabajo creada exitosamente', empresaId: result.insertId });
+        res.status(200).json({ msg: 'Empresa de trabajo creada exitosamente', empresaId: result.recordset[0].Id_Empresa_Trabajo });
     } catch (error) {
         console.error('Error al crear empresa de trabajo:', error.message);
         res.status(500).json({ msg: 'Error interno del servidor al crear empresa de trabajo' });

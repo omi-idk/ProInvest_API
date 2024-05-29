@@ -1,17 +1,17 @@
-import { getConnection, sql } from '../dbConfig/connection'
+import { getConnection, sql } from '../dbConfig/connection';
 
+// Obtener todos los códigos postales
 export const getCodigoPostal = async (req, res) => {
     const pool = await getConnection();
-    const result =  await pool.request().query("SELECT * FROM Codigo_Postal")
-   res.json(result.recordset)
+    const result = await pool.request().query("SELECT * FROM Codigo_Postal");
+    res.json(result.recordset);
 };
 
-
-
+// Crear un nuevo código postal
 export const createNewCodigoPostal = async (req, res) => {
-    let { Codigo_Postal, Colonia_Id } = req.body;
+    let { Codigo, Colonia_Id } = req.body;
 
-    if (!Codigo_Postal) {
+    if (!Codigo) {
         return res.status(400).json({ msg: 'Bad Request. Please provide the postal code' });
     }
 
@@ -19,9 +19,9 @@ export const createNewCodigoPostal = async (req, res) => {
 
     try {
         const result = await pool.request()
-            .input("codigoPostal", sql.VarChar, Codigo_Postal)
+            .input("codigo", sql.VarChar, Codigo)
             .input("coloniaId", sql.Int, Colonia_Id || null) // Permitir que Colonia_Id sea nulo si no se proporciona
-            .query('INSERT INTO Codigo_Postal (Codigo_Postal, Colonia_Id) VALUES (@codigoPostal, @coloniaId)');
+            .query('INSERT INTO Codigo_Postal (Codigo, Colonia_Id) VALUES (@codigo, @coloniaId)');
 
         res.status(200).json({ msg: 'Código postal creado exitosamente', codigoPostalId: result.insertId });
     } catch (error) {
@@ -30,13 +30,12 @@ export const createNewCodigoPostal = async (req, res) => {
     }
 };
 
-
-
+// Actualizar un código postal existente
 export const updateCodigoPostal = async (req, res) => {
     const { id } = req.params;
-    const { Codigo_Postal, Colonia_Id } = req.body;
+    const { Codigo, Colonia_Id } = req.body;
 
-    if (!Codigo_Postal) {
+    if (!Codigo) {
         return res.status(400).json({ msg: 'Bad Request. Please provide the postal code' });
     }
 
@@ -45,9 +44,9 @@ export const updateCodigoPostal = async (req, res) => {
     try {
         const result = await pool.request()
             .input("id", sql.Int, id)
-            .input("codigoPostal", sql.VarChar, Codigo_Postal)
+            .input("codigo", sql.VarChar, Codigo)
             .input("coloniaId", sql.Int, Colonia_Id || null) // Permitir que Colonia_Id sea nulo si no se proporciona
-            .query('UPDATE Codigo_Postal SET Codigo_Postal = @codigoPostal, Colonia_Id = @coloniaId WHERE Id_CodigoPostal = @id'); // Cambiado de 'Id_Codigo_Postal' a 'Id_CodigoPostal'
+            .query('UPDATE CodigoPostal SET Codigo = @codigo, Colonia_Id = @coloniaId WHERE Id_Codigo_Postal = @id');
 
         res.status(200).json({ msg: 'Código postal actualizado exitosamente' });
     } catch (error) {
@@ -56,6 +55,7 @@ export const updateCodigoPostal = async (req, res) => {
     }
 };
 
+// Eliminar un código postal existente
 export const deleteCodigoPostal = async (req, res) => {
     const { id } = req.params; // Obtener el ID del código postal de los parámetros de la solicitud
 
@@ -70,7 +70,7 @@ export const deleteCodigoPostal = async (req, res) => {
         // Crear la consulta SQL para eliminar el código postal por su ID
         const result = await pool.request()
             .input('idCodigoPostal', sql.Int, id)
-            .query('DELETE FROM Codigo_Postal WHERE Id_CodigoPostal = @idCodigoPostal'); // Cambiado de 'Id_Codigo_Postal' a 'Id_CodigoPostal'
+            .query('DELETE FROM CodigoPostal WHERE Id_Codigo_Postal = @idCodigoPostal');
 
         if (result.rowsAffected[0] > 0) {
             res.status(200).json({ msg: 'Código postal eliminado correctamente' });

@@ -1,11 +1,13 @@
-import { getConnection, sql } from '../dbConfig/connection'
+import { getConnection, sql } from '../dbConfig/connection';
 
+// Obtener todas las colonias
 export const getColonia = async (req, res) => {
     const pool = await getConnection();
-    const result =  await pool.request().query("SELECT * FROM Colonia")
-   res.json(result.recordset)
+    const result = await pool.request().query("SELECT * FROM Colonia");
+    res.json(result.recordset);
 };
 
+// Crear una nueva colonia
 export const createNewColonia = async (req, res) => {
     let { Nombre_Colonia, Municipio_Id } = req.body;
 
@@ -28,8 +30,7 @@ export const createNewColonia = async (req, res) => {
     }
 };
 
-
-
+// Actualizar una colonia existente
 export const updateColonia = async (req, res) => {
     const { id } = req.params;
     const { Nombre_Colonia, Municipio_Id } = req.body;
@@ -54,7 +55,7 @@ export const updateColonia = async (req, res) => {
     }
 };
 
-
+// Eliminar una colonia existente
 export const deleteColonia = async (req, res) => {
     const { id } = req.params; // Obtener el ID de la colonia de los parámetros de la solicitud
 

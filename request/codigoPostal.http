@@ -7,8 +7,7 @@ POST http://localhost:3000/codigoPostal
 Content-Type: application/json
 
 {
-    "Codigo_Postal": "91042"
-    
+    "Codigo": "91023"
 }
 
 ###

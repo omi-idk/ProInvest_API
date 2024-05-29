@@ -1,15 +1,15 @@
-import { getConnection, sql } from '../dbConfig/connection'
+import { getConnection, sql } from '../dbConfig/connection';
 
-
+// Obtener todos los estados
 export const getEstados = async (req, res) => {
     const pool = await getConnection();
-    const result =  await pool.request().query("SELECT * FROM Estado")
-   res.json(result.recordset)
+    const result = await pool.request().query("SELECT * FROM Estado");
+    res.json(result.recordset);
 };
 
-
+// Crear un nuevo estado
 export const createNewEstado = async (req, res) => {
-    let { Nombre_Estado } = req.body;
+    const { Nombre_Estado } = req.body;
 
     if (!Nombre_Estado) {
         return res.status(400).json({ msg: 'Bad Request. Please provide the state name' });
@@ -22,13 +22,14 @@ export const createNewEstado = async (req, res) => {
             .input("nombreEstado", sql.VarChar, Nombre_Estado)
             .query('INSERT INTO Estado (Nombre_Estado) VALUES (@nombreEstado)');
 
-        res.status(200).json({ msg: 'Estado creado exitosamente', estadoId: result.insertId });
+        res.status(200).json({ msg: 'Estado creado exitosamente', estadoId: result.recordset[0].Id_Estado });
     } catch (error) {
         console.error('Error al crear estado:', error.message);
         res.status(500).json({ msg: 'Error interno del servidor al crear estado' });
     }
 };
 
+// Actualizar un estado existente
 export const updateEstado = async (req, res) => {
     const { id } = req.params;
     const { Nombre_Estado } = req.body;
@@ -52,18 +53,17 @@ export const updateEstado = async (req, res) => {
     }
 };
 
+// Eliminar un estado
 export const deleteEstado = async (req, res) => {
-    const { id } = req.params; // Obtener el ID del estado de los parámetros de la solicitud
+    const { id } = req.params;
 
-    // Verificar que el ID esté presente
     if (!id) {
         return res.status(400).json({ msg: 'ID del estado no proporcionado' });
     }
 
-    const pool = await getConnection(); // Obtener la conexión a la base de datos
+    const pool = await getConnection();
 
     try {
-        // Crear la consulta SQL para eliminar el estado por su ID
         const result = await pool.request()
             .input('idEstado', sql.Int, id)
             .query('DELETE FROM Estado WHERE Id_Estado = @idEstado');
@@ -78,6 +78,3 @@ export const deleteEstado = async (req, res) => {
         res.status(500).json({ msg: 'Error interno del servidor al eliminar estado' });
     }
 };
-
-
-
