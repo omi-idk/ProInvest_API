@@ -33,6 +33,17 @@ export const createNewCliente = async (req, res) => {
     const pool = await getConnection();
 
     try {
+        // Comprobar si ya existe un cliente con el mismo RFC y correo electrónico
+        const checkDuplicate = await pool.request()
+            .input("correo", sql.VarChar, Correo)
+            .input("rfc", sql.VarChar, Rfc)
+            .query('SELECT * FROM Cliente WHERE correo = @correo OR rfc = @rfc');
+
+        if (checkDuplicate.recordset.length > 0) {
+            return res.status(400).json({ msg: 'Ya existe un cliente con el mismo RFC o correo electrónico' });
+        }
+
+        // Insertar nuevo cliente
         await pool.request()
             .input("nombres", sql.VarChar, Nombres)
             .input("apellidoPaterno", sql.VarChar, Apellido_Paterno)

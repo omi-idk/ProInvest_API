@@ -7,19 +7,15 @@ POST http://localhost:3000/cliente
 Content-Type: application/json
 
 {
-    "Nombres": "Jaime",
+"Nombres": "Jaime",
     "Apellido_Paterno": "Gomez",
     "Apellido_Materno": "Perez",
-    "Correo": "jaime.gomez@example.com",
+    "Correo": "jaime.gomez@example3.com",
     "Telefono": "555-1234",
-    "Rfc": "GOMJ910101XXX",
+    "Rfc": "GOMJ910101XX4",
     "Fecha_Nacimiento": "1991-01-01",
-    "Grado_Academico": "Licenciatura",
-    "Profesion": "Ingeniero",
     "Contraseña": "micontra",
-    "Empresa_Trabajo_Id": "",
-    "Codigo_Postal_Id": "",
-    "Informacion_Financiera_Id": ""
+    "Codigo_Postal": "91023" 
 }
 
 ###
